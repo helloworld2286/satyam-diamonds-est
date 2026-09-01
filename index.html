@@ -23,6 +23,29 @@ body{
   color:var(--ink);
 }
 button,input,textarea{font:inherit}
+.grade-card{
+  min-height:86px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:14px 10px;
+  background:#fff;
+}
+.grade-card strong{font-size:18px;color:#111;margin-bottom:5px}
+.grade-card span{font-size:12px;color:#6d6d6d;font-weight:700}
+.rule-note{
+  margin:14px 0 22px;
+  padding:11px 13px;
+  border:1px solid #d8d8d8;
+  border-radius:10px;
+  background:#f6f6f6;
+  color:#555;
+  font-size:13px;
+  line-height:1.45;
+}
+
 .shell{
   width:min(900px,calc(100% - 24px));
   margin:0 auto;
@@ -402,10 +425,38 @@ textarea{
   body{background:#fff}
   .shell{box-shadow:none;width:100%}
   .step{display:none!important;min-height:auto;padding:0}
-  .step[data-step="11"]{display:block!important}
+  .step[data-step="12"]{display:block!important}
   .pdf-actions{display:none!important}
   .result-box{box-shadow:none;border:0;padding:0}
 }
+
+
+.price-breakdown{
+  max-width:520px;
+  margin:18px auto 10px;
+  border:1px solid #dedede;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+.price-line{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:14px 18px;
+  border-bottom:1px solid #ececec;
+  font-size:15px;
+  color:#444;
+}
+.price-line strong{color:#111;}
+.price-line.final-line{
+  border-bottom:0;
+  background:#f3f3f3;
+  font-size:18px;
+  font-weight:800;
+}
+.price-line.final-line span,
+.price-line.final-line strong{color:#000;}
 
 </style>
 
@@ -464,18 +515,19 @@ textarea{
 <section class="step" data-step="3">
   <div class="content">
     <h2>Select your diamond size</h2>
-    <p class="subtitle">We’ll fine-tune the exact ratio and dimensions together later.</p>
+    <p class="subtitle">Exact base pricing shown in CAD. Pricing is the same for every diamond shape and ring style.</p>
     <div class="grid cols-4 single" data-key="size">
-      <div class="card" data-value="2CT" data-price="0"><div class="media"><img src="images/sizes/2ct.png" alt="2CT"></div><div class="label">2CT</div></div>
-      <div class="card" data-value="2.5CT" data-price="500"><div class="media"><img src="images/sizes/2-5ct.png" alt="2.5CT"></div><div class="label">2.5CT</div></div>
-      <div class="card" data-value="3CT" data-price="1000"><div class="media"><img src="images/sizes/3ct.png" alt="3CT"></div><div class="label">3CT</div></div>
-      <div class="card" data-value="3.5CT" data-price="1500"><div class="media"><img src="images/sizes/3-5ct.png" alt="3.5CT"></div><div class="label">3.5CT</div></div>
-      <div class="card" data-value="4CT" data-price="2200"><div class="media"><img src="images/sizes/4ct.png" alt="4CT"></div><div class="label">4CT</div></div>
-      <div class="card" data-value="4.5CT" data-price="3000"><div class="media"><img src="images/sizes/4-5ct.png" alt="4.5CT"></div><div class="label">4.5CT</div></div>
-      <div class="card" data-value="5CT" data-price="3800"><div class="media"><img src="images/sizes/5ct.png" alt="5CT"></div><div class="label">5CT</div></div>
-      <div class="card" data-value="6CT" data-price="5200"><div class="media"><img src="images/sizes/6ct.png" alt="6CT"></div><div class="label">6CT</div></div>
-      <div class="card" data-value="7CT" data-price="7000"><div class="media"><img src="images/sizes/7ct.png" alt="7CT"></div><div class="label">7CT</div></div>
+      <div class="card" data-value="1CT"><div class="media"><img src="images/sizes/2ct.png" alt="1CT" style="transform:scale(.62)"></div><div class="label">1CT</div></div>
+      <div class="card" data-value="1.5CT"><div class="media"><img src="images/sizes/2ct.png" alt="1.5CT" style="transform:scale(.78)"></div><div class="label">1.5CT</div></div>
+      <div class="card" data-value="2CT"><div class="media"><img src="images/sizes/2ct.png" alt="2CT"></div><div class="label">2CT</div></div>
+      <div class="card" data-value="2.5CT"><div class="media"><img src="images/sizes/2-5ct.png" alt="2.5CT"></div><div class="label">2.5CT</div></div>
+      <div class="card" data-value="3CT"><div class="media"><img src="images/sizes/3ct.png" alt="3CT"></div><div class="label">3CT</div></div>
+      <div class="card" data-value="3.5CT"><div class="media"><img src="images/sizes/3-5ct.png" alt="3.5CT"></div><div class="label">3.5CT</div></div>
+      <div class="card" data-value="4CT"><div class="media"><img src="images/sizes/4ct.png" alt="4CT"></div><div class="label">4CT</div></div>
+      <div class="card" data-value="4.5CT"><div class="media"><img src="images/sizes/4-5ct.png" alt="4.5CT"></div><div class="label">4.5CT</div></div>
+      <div class="card" data-value="5CT"><div class="media"><img src="images/sizes/5ct.png" alt="5CT"></div><div class="label">5CT</div></div>
     </div>
+    <div class="rule-note">Base diamond quality: <strong>E Colour + VVS2</strong>. Base band: <strong>2.2–2.3 mm width × 1.8 mm thickness</strong>. Base metal: <strong>14K gold</strong>.</div>
     <div class="nav"><button class="nav-back" onclick="go(2)">Back</button><button class="nav-next" data-next="4" disabled>Next</button></div>
   </div>
 </section>
@@ -483,12 +535,23 @@ textarea{
 <section class="step" data-step="4">
   <div class="content">
     <h2>Choose your diamond quality</h2>
-    <p class="subtitle">Colour and clarity grade. Every option is eye-clean and brilliant.</p>
-    <div class="grid cols-3 single" data-key="quality">
-      <div class="card" data-value="F Colour, VS1 Clarity" data-price="0"><div class="media"><img src="images/quality/f-vs1.png" alt="F Colour, VS1 Clarity"></div><div class="label">F Colour, VS1 Clarity (+$0)</div></div>
-      <div class="card" data-value="E Colour, VVS2 Clarity" data-price="400"><div class="media"><img src="images/quality/e-vvs2.png" alt="E Colour, VVS2 Clarity"></div><div class="label">E Colour, VVS2 Clarity (+$400)</div></div>
-      <div class="card" data-value="D Colour, VVS1 Clarity" data-price="1000"><div class="media"><img src="images/quality/d-vvs1.png" alt="D Colour, VVS1 Clarity"></div><div class="label">D Colour, VVS1 Clarity (+$1,000)</div></div>
+    <p class="subtitle">E Colour + VVS2 is the base quality. Colour and clarity adjustments are calculated separately.</p>
+
+    <div class="field-title">Diamond Colour</div>
+    <div class="grid cols-3 single" data-key="color">
+      <div class="card" data-value="F Colour"><div class="grade-card"><strong>F Colour</strong></div></div>
+      <div class="card" data-value="E Colour"><div class="grade-card"><strong>E Colour</strong></div></div>
+      <div class="card" data-value="D Colour"><div class="grade-card"><strong>D Colour</strong></div></div>
     </div>
+
+    <div class="field-title">Diamond Clarity</div>
+    <div class="grid cols-4 single" data-key="clarity">
+      <div class="card" data-value="VVS1"><div class="grade-card"><strong>VVS1</strong></div></div>
+      <div class="card" data-value="VVS2"><div class="grade-card"><strong>VVS2</strong></div></div>
+      <div class="card" data-value="VS1"><div class="grade-card"><strong>VS1</strong></div></div>
+      <div class="card" data-value="VS2"><div class="grade-card"><strong>VS2</strong></div></div>
+    </div>
+
     <div class="nav"><button class="nav-back" onclick="go(3)">Back</button><button class="nav-next" data-next="5" disabled>Next</button></div>
   </div>
 </section>
@@ -496,16 +559,16 @@ textarea{
 <section class="step" data-step="5">
   <div class="content">
     <h2>Which setting feels like you?</h2>
-    <p class="subtitle">The overall silhouette of your ring.</p>
+    <p class="subtitle">The overall silhouette of your ring. All ring styles use the same base pricing.</p>
     <div class="grid cols-4 single" data-key="setting">
-      <div class="card" data-value="Solitaire - Classic" data-price="1000"><div class="media"><img src="images/settings/solitaire.png" alt="Solitaire - Classic"></div><div class="label">Solitaire - Classic<br>(+$1,000)</div></div>
-      <div class="card" data-value="Cathedral - Classic" data-price="1000"><div class="media"><img src="images/settings/cathedral.png" alt="Cathedral - Classic"></div><div class="label">Cathedral - Classic<br>(+$1,000)</div></div>
-      <div class="card" data-value="Side Stones - Small" data-price="1300"><div class="media"><img src="images/settings/side-stones-small.png" alt="Side Stones - Small"></div><div class="label">Side Stones - Small<br>(+$1,300)</div></div>
-      <div class="card" data-value="Side Stones - Large" data-price="1800"><div class="media"><img src="images/settings/side-stones-large.png" alt="Side Stones - Large"></div><div class="label">Side Stones - Large<br>(+$1,800)</div></div>
-      <div class="card" data-value="Bypass Setting" data-price="1200"><div class="media"><img src="images/settings/bypass.png" alt="Bypass Setting"></div><div class="label">Bypass Setting<br>(+$1,200)</div></div>
-      <div class="card" data-value="East-West Setting" data-price="1000"><div class="media"><img src="images/settings/east-west.png" alt="East-West Setting"></div><div class="label">East-West Setting<br>(+$1,000)</div></div>
-      <div class="card" data-value="Vintage / Art Deco" data-price="1400"><div class="media"><img src="images/settings/vintage-art-deco.png" alt="Vintage / Art Deco"></div><div class="label">Vintage / Art Deco<br>(+$1,400)</div></div>
-      <div class="card" data-value="Toi et Moi" data-price="3000"><div class="media"><img src="images/settings/toi-et-moi.png" alt="Toi et Moi"></div><div class="label">Toi et Moi (+$3,000)</div></div>
+      <div class="card" data-value="Solitaire - Classic"><div class="media"><img src="images/settings/solitaire.png" alt="Solitaire - Classic"></div><div class="label">Solitaire - Classic</div></div>
+      <div class="card" data-value="Cathedral - Classic"><div class="media"><img src="images/settings/cathedral.png" alt="Cathedral - Classic"></div><div class="label">Cathedral - Classic</div></div>
+      <div class="card" data-value="Side Stones - Small"><div class="media"><img src="images/settings/side-stones-small.png" alt="Side Stones - Small"></div><div class="label">Side Stones - Small</div></div>
+      <div class="card" data-value="Side Stones - Large"><div class="media"><img src="images/settings/side-stones-large.png" alt="Side Stones - Large"></div><div class="label">Side Stones - Large</div></div>
+      <div class="card" data-value="Bypass Setting"><div class="media"><img src="images/settings/bypass.png" alt="Bypass Setting"></div><div class="label">Bypass Setting</div></div>
+      <div class="card" data-value="East-West Setting"><div class="media"><img src="images/settings/east-west.png" alt="East-West Setting"></div><div class="label">East-West Setting</div></div>
+      <div class="card" data-value="Vintage / Art Deco"><div class="media"><img src="images/settings/vintage-art-deco.png" alt="Vintage / Art Deco"></div><div class="label">Vintage / Art Deco</div></div>
+      <div class="card" data-value="Toi et Moi"><div class="media"><img src="images/settings/toi-et-moi.png" alt="Toi et Moi"></div><div class="label">Toi et Moi</div></div>
     </div>
     <div class="nav"><button class="nav-back" onclick="go(4)">Back</button><button class="nav-next" data-next="6" disabled>Next</button></div>
   </div>
@@ -516,27 +579,33 @@ textarea{
     <h2>How should the diamond be held?</h2>
     <p class="subtitle">How the stone is displayed and secured. Pick one or combine a couple.</p>
     <div class="grid cols-4 multi" data-key="holding">
-      <div class="card" data-value="Gallery Rail - Classic" data-price="0"><div class="media"><img src="images/holding/gallery-rail.png" alt="Gallery Rail - Classic"></div><div class="label">Gallery Rail - Classic<br>(+$0)</div></div>
-      <div class="card" data-value="Hidden Halo" data-price="300"><div class="media"><img src="images/holding/hidden-halo.png" alt="Hidden Halo"></div><div class="label">Hidden Halo (+$300)</div></div>
-      <div class="card" data-value="Curved Hidden Halo" data-price="350"><div class="media"><img src="images/holding/curved-hidden-halo.png" alt="Curved Hidden Halo"></div><div class="label">Curved Hidden Halo<br>(+$350)</div></div>
-      <div class="card" data-value="Outer Halo" data-price="400"><div class="media"><img src="images/holding/outer-halo.png" alt="Outer Halo"></div><div class="label">Outer Halo (+$400)</div></div>
-      <div class="card" data-value="Tulip Basket" data-price="200"><div class="media"><img src="images/holding/tulip-basket.png" alt="Tulip Basket"></div><div class="label">Tulip Basket (+$200)</div></div>
-      <div class="card" data-value="Diamond Basket" data-price="400"><div class="media"><img src="images/holding/diamond-basket.png" alt="Diamond Basket"></div><div class="label">Diamond Basket<br>(+$400)</div></div>
-      <div class="card" data-value="Half Bezel" data-price="150"><div class="media"><img src="images/holding/half-bezel.png" alt="Half Bezel"></div><div class="label">Half Bezel (+$150)</div></div>
-      <div class="card" data-value="Full Bezel" data-price="200"><div class="media"><img src="images/holding/full-bezel.png" alt="Full Bezel"></div><div class="label">Full Bezel (+$200)</div></div>
+      <div class="card" data-value="Gallery Rail - Classic"><div class="media"><img src="images/holding/gallery-rail.png" alt="Gallery Rail - Classic"></div><div class="label">Gallery Rail - Classic</div></div>
+      <div class="card" data-value="Hidden Halo"><div class="media"><img src="images/holding/hidden-halo.png" alt="Hidden Halo"></div><div class="label">Hidden Halo</div></div>
+      <div class="card" data-value="Curved Hidden Halo"><div class="media"><img src="images/holding/curved-hidden-halo.png" alt="Curved Hidden Halo"></div><div class="label">Curved Hidden Halo</div></div>
+      <div class="card" data-value="Outer Halo"><div class="media"><img src="images/holding/outer-halo.png" alt="Outer Halo"></div><div class="label">Outer Halo</div></div>
+      <div class="card" data-value="Tulip Basket"><div class="media"><img src="images/holding/tulip-basket.png" alt="Tulip Basket"></div><div class="label">Tulip Basket</div></div>
+      <div class="card" data-value="Diamond Basket"><div class="media"><img src="images/holding/diamond-basket.png" alt="Diamond Basket"></div><div class="label">Diamond Basket</div></div>
+      <div class="card" data-value="Half Bezel"><div class="media"><img src="images/holding/half-bezel.png" alt="Half Bezel"></div><div class="label">Half Bezel</div></div>
+      <div class="card" data-value="Full Bezel"><div class="media"><img src="images/holding/full-bezel.png" alt="Full Bezel"></div><div class="label">Full Bezel</div></div>
     </div>
     <div class="nav"><button class="nav-back" onclick="go(5)">Back</button><button class="nav-next" data-next="7" disabled>Next</button></div>
   </div>
 </section>
 
+
 <section class="step" data-step="7">
   <div class="content">
-    <h2>Which band width do you prefer?</h2>
-    <div class="grid cols-2 single" data-key="band" style="margin-top:22px;width:430px;max-width:100%">
-      <div class="card" data-value="Thin 1.8mm" data-price="0"><div class="media cover"><img src="images/bands/thin-1-8mm.png" alt="Thin 1.8mm"></div><div class="label">Thin 1.8mm (+$0)</div></div>
-      <div class="card" data-value="Classic 2mm" data-price="0"><div class="media cover"><img src="images/bands/classic-2mm.png" alt="Classic 2mm"></div><div class="label">Classic 2mm (+$0)</div></div>
-      <div class="card" data-value="Medium 3mm" data-price="300"><div class="media cover"><img src="images/bands/medium-3mm.png" alt="Medium 3mm"></div><div class="label">Medium 3mm (+$300)</div></div>
-      <div class="card" data-value="Thick 4mm" data-price="400"><div class="media cover"><img src="images/bands/thick-4mm.png" alt="Thick 4mm"></div><div class="label">Thick 4mm (+$400)</div></div>
+    <h2>What band style do you prefer?</h2>
+    <p class="subtitle">Choose the band style that best matches your ring.</p>
+    <div class="grid cols-4 single" data-key="bandStyle">
+      <div class="card" data-value="Regular - Classic"><div class="media cover"><img src="images/band-styles/regular-classic.png" alt="Regular Classic band"></div><div class="label">Regular - Classic</div></div>
+      <div class="card" data-value="Pave Diamonds"><div class="media cover"><img src="images/band-styles/pave-diamonds.png" alt="Pave Diamonds band"></div><div class="label">Pave Diamonds</div></div>
+      <div class="card" data-value="3 Sided Pave"><div class="media cover"><img src="images/band-styles/3-sided-pave.png" alt="3 Sided Pave band"></div><div class="label">3 Sided Pave</div></div>
+      <div class="card" data-value="Hidden Pave"><div class="media cover"><img src="images/band-styles/hidden-pave.png" alt="Hidden Pave band"></div><div class="label">Hidden Pave</div></div>
+      <div class="card" data-value="Channel Diamonds"><div class="media cover"><img src="images/band-styles/channel-diamonds.png" alt="Channel Diamonds band"></div><div class="label">Channel Diamonds</div></div>
+      <div class="card" data-value="Bubble Band"><div class="media cover"><img src="images/band-styles/bubble-band.png" alt="Bubble Band"></div><div class="label">Bubble Band</div></div>
+      <div class="card" data-value="Split Shank"><div class="media cover"><img src="images/band-styles/split-shank.png" alt="Split Shank band"></div><div class="label">Split Shank</div></div>
+      <div class="card" data-value="Band Engraving"><div class="media cover"><img src="images/band-styles/band-engraving.png" alt="Band Engraving"></div><div class="label">Band Engraving</div></div>
     </div>
     <div class="nav"><button class="nav-back" onclick="go(6)">Back</button><button class="nav-next" data-next="8" disabled>Next</button></div>
   </div>
@@ -544,21 +613,43 @@ textarea{
 
 <section class="step" data-step="8">
   <div class="content">
-    <h2>Choose your ring metal</h2>
-    <div class="grid cols-4 single" data-key="metal" style="margin-top:22px">
-      <div class="card" data-value="14K Yellow Gold" data-price="0"><div class="media"><img src="images/metals/14k-yellow.png" alt="14K Yellow Gold"></div><div class="label">14K Yellow Gold (+$0)</div></div>
-      <div class="card" data-value="14K White Gold" data-price="0"><div class="media"><img src="images/metals/14k-white.png" alt="14K White Gold"></div><div class="label">14K White Gold (+$0)</div></div>
-      <div class="card" data-value="18K Yellow Gold" data-price="400"><div class="media"><img src="images/metals/18k-yellow.png" alt="18K Yellow Gold"></div><div class="label">18K Yellow Gold<br>(+$400)</div></div>
-      <div class="card" data-value="18K White Gold" data-price="400"><div class="media"><img src="images/metals/18k-white.png" alt="18K White Gold"></div><div class="label">18K White Gold<br>(+$400)</div></div>
-      <div class="card" data-value="14K Rose Gold" data-price="0"><div class="media"><img src="images/metals/14k-rose.png" alt="14K Rose Gold"></div><div class="label">14K Rose Gold (+$0)</div></div>
-      <div class="card" data-value="Platinum" data-price="650"><div class="media"><img src="images/metals/platinum.png" alt="Platinum"></div><div class="label">Platinum (+$650)</div></div>
-      <div class="card" data-value="Two Tone Ring" data-price="500"><div class="media"><img src="images/metals/two-tone.png" alt="Two Tone Ring"></div><div class="label">Two Tone Ring (+$500)</div></div>
+    <h2>Choose your band details</h2>
+    <p class="subtitle">Standard thickness is 1.8 mm. The regular width is 2.2–2.3 mm.</p>
+
+    <div class="field-title">Band Width</div>
+    <div class="grid cols-2 single" data-key="band">
+      <div class="card" data-value="1.8–2.0 mm width × 1.8 mm thickness"><div class="media cover"><img src="images/bands/thin-1-8mm.png" alt="1.8 to 2.0 mm band"></div><div class="label">1.8–2.0 mm</div></div>
+      <div class="card" data-value="2.1 mm width × 1.8 mm thickness"><div class="media cover"><img src="images/bands/classic-2mm.png" alt="2.1 mm band"></div><div class="label">2.1 mm</div></div>
+      <div class="card" data-value="2.2–2.3 mm width × 1.8 mm thickness"><div class="media cover"><img src="images/bands/medium-3mm.png" alt="2.2 to 2.3 mm band"></div><div class="label">2.2–2.3 mm</div></div>
+      <div class="card" data-value="2.5 mm width × 1.8 mm thickness"><div class="media cover"><img src="images/bands/thick-4mm.png" alt="2.5 mm band"></div><div class="label">2.5 mm</div></div>
     </div>
-    <div class="nav"><button class="nav-back" onclick="go(7)">Back</button><button class="nav-next" data-next="9" disabled>Next</button></div>
+
+    <div class="field-title">Diamond Pavé Band</div>
+    <div class="grid cols-3 single" data-key="pave">
+      <div class="card" data-value="Plain / No Pavé"><div class="grade-card"><strong>Plain Band</strong></div></div>
+      <div class="card" data-value="50% Diamond Pavé"><div class="grade-card"><strong>50% Pavé</strong></div></div>
+      <div class="card" data-value="70% Diamond Pavé"><div class="grade-card"><strong>70% Pavé</strong></div></div>
+    </div>
+
+    <div class="nav"><button class="nav-back" onclick="go(6)">Back</button><button class="nav-next" data-next="9" disabled>Next</button></div>
   </div>
 </section>
 
 <section class="step" data-step="9">
+  <div class="content">
+    <h2>Choose your ring metal</h2>
+    <p class="subtitle">Choose the metal that best matches your ring design.</p>
+    <div class="grid cols-2 single" data-key="metal" style="margin-top:22px">
+      <div class="card" data-value="14K Yellow Gold"><div class="media"><img src="images/metals/14k-yellow.png" alt="14K Yellow Gold"></div><div class="label">14K Yellow Gold</div></div>
+      <div class="card" data-value="14K White Gold"><div class="media"><img src="images/metals/14k-white.png" alt="14K White Gold"></div><div class="label">14K White Gold</div></div>
+      <div class="card" data-value="18K Yellow Gold"><div class="media"><img src="images/metals/18k-yellow.png" alt="18K Yellow Gold"></div><div class="label">18K Yellow Gold</div></div>
+      <div class="card" data-value="18K White Gold"><div class="media"><img src="images/metals/18k-white.png" alt="18K White Gold"></div><div class="label">18K White Gold</div></div>
+    </div>
+    <div class="nav"><button class="nav-back" onclick="go(8)">Back</button><button class="nav-next" data-next="10" disabled>Next</button></div>
+  </div>
+</section>
+
+<section class="step" data-step="10">
   <div class="content">
     <h2>Show us your inspiration ✨</h2>
     <p class="subtitle">Screenshots, Pinterest saves, a photo of grandma’s ring, anything helps us nail the vision. All optional.</p>
@@ -583,35 +674,39 @@ textarea{
     <div class="field-title">Any other details we should know?</div>
     <textarea id="details"></textarea>
 
-    <div class="nav"><button class="nav-back" onclick="go(8)">Back</button><button class="nav-next enabled" onclick="saveOptional();go(10)">Next</button></div>
+    <div class="nav"><button class="nav-back" onclick="go(9)">Back</button><button class="nav-next enabled" onclick="saveOptional();go(11)">Next</button></div>
   </div>
 </section>
 
-<section class="step" data-step="10">
+<section class="step" data-step="11">
   <div class="content">
     <h2>When do you need this by?</h2>
     <p class="subtitle">Our average turnaround is 12–14 weeks, depending on the design. Need it sooner? We can rush it.</p>
     <div class="grid cols-2" id="timelineGrid">
-      <button class="choice-big" data-value="6 Weeks" data-price="800">6 Weeks (+$800)</button>
-      <button class="choice-big" data-value="6 - 8 Weeks" data-price="600">6 - 8 Weeks (+$600)</button>
-      <button class="choice-big" data-value="8 - 10 Weeks" data-price="400">8 - 10 Weeks (+$400)</button>
-      <button class="choice-big" data-value="12 Weeks+" data-price="0">12 Weeks+ (+$0)</button>
+      <button class="choice-big" data-value="6 Weeks">6 Weeks</button>
+      <button class="choice-big" data-value="6 - 8 Weeks">6 - 8 Weeks</button>
+      <button class="choice-big" data-value="8 - 10 Weeks">8 - 10 Weeks</button>
+      <button class="choice-big" data-value="12 Weeks+">12 Weeks+</button>
     </div>
-    <div class="nav back-center"><button class="nav-back" style="background:var(--burgundy);color:#fff;border:0" onclick="go(9)">Back</button></div>
+    <div class="nav back-center"><button class="nav-back" style="background:var(--burgundy);color:#fff;border:0" onclick="go(10)">Back</button></div>
   </div>
 </section>
 
 
-<section class="step" data-step="11">
+<section class="step" data-step="12">
   <div class="content result">
     <h2>Your ring estimate is ready ✨</h2>
     <p class="subtitle">Here is a complete summary of your custom ring selections.</p>
 
     <div class="result-box" id="pdfEstimateArea">
       <div style="font-size:12px;font-weight:800;letter-spacing:1px;color:#111111;margin-bottom:8px;">CUSTOM RING ESTIMATE</div>
-      <div class="small-note">ESTIMATED PRICE</div>
-      <div class="price" id="resultPrice">$0 – $0 CAD</div>
-      <div class="small-note">Final pricing may vary based on the exact stone, measurements, ring size, availability and custom design details.</div>
+      <div class="small-note">YOUR ESTIMATE</div>
+      <div class="price-breakdown">
+        <div class="price-line"><span>Total Price</span><strong id="subtotalPrice">$0 CAD</strong></div>
+        <div class="price-line"><span>Tax (13% HST)</span><strong id="taxPrice">$0 CAD</strong></div>
+        <div class="price-line final-line"><span>Final Total</span><strong id="resultPrice">$0 CAD</strong></div>
+      </div>
+      <div class="small-note">All amounts are shown in CAD.</div>
 
       <div id="referencePreviewWrap" style="display:none;margin:28px auto 10px;text-align:center;">
         <div style="font-weight:800;margin-bottom:10px;">Reference / Inspiration Image</div>
@@ -629,7 +724,7 @@ textarea{
     <div class="pdf-actions" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
       <button class="nav-back" onclick="window.print()">Print Estimate</button>
       <button class="nav-next enabled" style="width:178px" onclick="downloadEstimatePDF()">Download PDF</button>
-      <button class="nav-back" onclick="go(10)">Back</button>
+      <button class="nav-back" onclick="go(11)">Back</button>
     </div>
   </div>
 </section>
@@ -638,6 +733,65 @@ textarea{
 
 <script>
 const answers = {};
+
+// Internal pricing configuration.
+// NOTE: This is hidden from the customer interface, but because this is a static HTML file,
+// a technical user can still inspect it in browser developer tools. A true private backend
+// requires server-side code/API.
+const PRICING = {
+  '1CT': 1800,
+  '1.5CT': 2100,
+  '2CT': 2300,
+  '2.5CT': 2600,
+  '3CT': 2900,
+  '3.5CT': 3200,
+  '4CT': 3500,
+  '4.5CT': 3800,
+  '5CT': 4100,
+  'F Colour': -50,
+  'E Colour': 0,
+  'D Colour': 150,
+  'VVS1': 500,
+  'VVS2': 0,
+  'VS1': -50,
+  'VS2': -100,
+  'Solitaire - Classic': 0,
+  'Cathedral - Classic': 0,
+  'Side Stones - Small': 0,
+  'Side Stones - Large': 0,
+  'Bypass Setting': 0,
+  'East-West Setting': 0,
+  'Vintage / Art Deco': 0,
+  'Toi et Moi': 0,
+  'Gallery Rail - Classic': 0,
+  'Hidden Halo': 0,
+  'Curved Hidden Halo': 0,
+  'Outer Halo': 0,
+  'Tulip Basket': 0,
+  'Diamond Basket': 0,
+  'Half Bezel': 0,
+  'Full Bezel': 0,
+  '1.8–2.0 mm width × 1.8 mm thickness': -100,
+  '2.1 mm width × 1.8 mm thickness': -50,
+  '2.2–2.3 mm width × 1.8 mm thickness': 0,
+  '2.5 mm width × 1.8 mm thickness': 200,
+  'Plain / No Pavé': 0,
+  '50% Diamond Pavé': 150,
+  '70% Diamond Pavé': 200,
+  '14K Yellow Gold': 0,
+  '14K White Gold': 0,
+  '18K Yellow Gold': 300,
+  '18K White Gold': 300,
+  '6 Weeks': 0,
+  '6 - 8 Weeks': 0,
+  '8 - 10 Weeks': 0,
+  '12 Weeks+': 0
+};
+const TAX_RATE = 0.13; // Ontario HST
+function getPrice(value){
+  return Number(PRICING[value] || 0);
+}
+
 let extras = {};
 
 function go(n){
@@ -646,16 +800,26 @@ function go(n){
   if(next){next.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 }
 
+function updateStepNext(step){
+  const next=step.querySelector('.nav-next[data-next]');
+  if(!next) return;
+  const singleGroups=[...step.querySelectorAll('.single[data-key]')];
+  const multiGroups=[...step.querySelectorAll('.multi[data-key]')];
+  const singlesReady=singleGroups.every(g=>Boolean(answers[g.dataset.key]));
+  const multisReady=multiGroups.every(g=>Array.isArray(answers[g.dataset.key]) && answers[g.dataset.key].length>0);
+  const ready=singlesReady && multisReady;
+  next.disabled=!ready;
+  next.classList.toggle('enabled',ready);
+}
+
 document.querySelectorAll('.single').forEach(group=>{
   const key=group.dataset.key;
   group.querySelectorAll('.card').forEach(card=>{
     card.addEventListener('click',()=>{
       group.querySelectorAll('.card').forEach(c=>c.classList.remove('selected'));
       card.classList.add('selected');
-      answers[key]={value:card.dataset.value,price:Number(card.dataset.price||0)};
-      const step=group.closest('.step');
-      const next=step.querySelector('.nav-next');
-      if(next){next.disabled=false;next.classList.add('enabled');}
+      answers[key]={value:card.dataset.value,price:getPrice(card.dataset.value)};
+      updateStepNext(group.closest('.step'));
     });
   });
 });
@@ -667,13 +831,9 @@ document.querySelectorAll('.multi').forEach(group=>{
     card.addEventListener('click',()=>{
       card.classList.toggle('selected');
       answers[key]=[...group.querySelectorAll('.card.selected')].map(c=>({
-        value:c.dataset.value, price:Number(c.dataset.price||0)
+        value:c.dataset.value, price:getPrice(c.dataset.value)
       }));
-      const step=group.closest('.step');
-      const next=step.querySelector('.nav-next');
-      const any=answers[key].length>0;
-      next.disabled=!any;
-      next.classList.toggle('enabled',any);
+      updateStepNext(group.closest('.step'));
     });
   });
 });
@@ -714,17 +874,16 @@ function saveOptional(){
 
 document.querySelectorAll('#timelineGrid .choice-big').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    answers.timeline={value:btn.dataset.value,price:Number(btn.dataset.price||0)};
+    answers.timeline={value:btn.dataset.value,price:getPrice(btn.dataset.value)};
     saveOptional();
     renderEstimate();
-    go(11);
+    go(12);
   });
 });
 
 
 function renderEstimate(){
-  const base=2500;
-  let total=base;
+  let total=0;
 
   Object.entries(answers).forEach(([key,v])=>{
     if(key === 'contact') return;
@@ -732,21 +891,29 @@ function renderEstimate(){
     else if(v && typeof v==='object') total+=Number(v.price||0);
   });
 
-  const low=Math.round(total/50)*50;
-  const high=Math.round(total*1.12/50)*50;
+  const subtotal = Math.round(total);
+  const tax = Math.round((subtotal * TAX_RATE) * 100) / 100;
+  const finalTotal = Math.round((subtotal + tax) * 100) / 100;
 
+  document.getElementById('subtotalPrice').textContent=
+    `$${subtotal.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2})} CAD`;
+  document.getElementById('taxPrice').textContent=
+    `$${tax.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2})} CAD`;
   document.getElementById('resultPrice').textContent=
-    `$${low.toLocaleString()} – $${high.toLocaleString()} CAD`;
+    `$${finalTotal.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2})} CAD`;
 
   const rows=[];
   const labels={
     location:'Location',
     shape:'Diamond Shape',
     size:'Diamond Size',
-    quality:'Diamond Quality',
+    color:'Diamond Colour',
+    clarity:'Diamond Clarity',
     setting:'Ring Setting / Style',
     holding:'Diamond Holding / Basket',
-    band:'Band Width',
+    bandStyle:'Band Style',
+    band:'Band Width / Thickness',
+    pave:'Diamond Pavé Band',
     metal:'Gold / Metal Material',
     timeline:'Turnaround Time'
   };
@@ -810,8 +977,10 @@ function renderEstimate(){
   }
 
   window.currentEstimate = {
-    low,
-    high,
+    subtotal,
+    tax,
+    finalTotal,
+    taxRate:TAX_RATE,
     answers: JSON.parse(JSON.stringify(answers)),
     extras: {...extras}
   };
@@ -876,37 +1045,59 @@ async function downloadEstimatePDF(){
   pdf.setTextColor(85,85,85);
   pdf.setFontSize(10);
   pdf.setFont('helvetica','normal');
-  pdf.text('Estimated Price', margin, y);
+  pdf.text('Price Summary', margin, y);
+  y += 8;
+
+  const money = n => '$' + Number(n).toLocaleString('en-CA', {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }) + ' CAD';
+
+  pdf.setFontSize(11);
+  pdf.setFont('helvetica','normal');
+  pdf.setTextColor(70,70,70);
+  pdf.text('Total Price', margin, y);
+  pdf.setFont('helvetica','bold');
+  pdf.setTextColor(25,25,25);
+  pdf.text(money(window.currentEstimate.subtotal), pageWidth-margin, y, {align:'right'});
+  y += 7;
+
+  pdf.setFont('helvetica','normal');
+  pdf.setTextColor(70,70,70);
+  pdf.text('Tax (13% HST)', margin, y);
+  pdf.setFont('helvetica','bold');
+  pdf.setTextColor(25,25,25);
+  pdf.text(money(window.currentEstimate.tax), pageWidth-margin, y, {align:'right'});
+  y += 8;
+
+  pdf.setDrawColor(215,215,215);
+  pdf.line(margin, y, pageWidth-margin, y);
   y += 8;
 
   pdf.setTextColor(20,20,20);
-  pdf.setFontSize(23);
+  pdf.setFontSize(16);
   pdf.setFont('helvetica','bold');
-  pdf.text(
-    `$${window.currentEstimate.low.toLocaleString()} - $${window.currentEstimate.high.toLocaleString()} CAD`,
-    margin,
-    y
-  );
+  pdf.text('Final Total', margin, y);
+  pdf.text(money(window.currentEstimate.finalTotal), pageWidth-margin, y, {align:'right'});
   y += 12;
 
   pdf.setTextColor(100,100,100);
   pdf.setFont('helvetica','normal');
   pdf.setFontSize(9);
-  const disclaimer = pdf.splitTextToSize(
-    'Final pricing may vary based on the exact stone, measurements, ring size, availability and custom design details.',
-    usableWidth
-  );
-  pdf.text(disclaimer, margin, y);
-  y += disclaimer.length * 5 + 8;
+  pdf.text('All amounts are shown in CAD.', margin, y);
+  y += 10;
 
   const labels = {
     location:'Location',
     shape:'Diamond Shape',
     size:'Diamond Size',
-    quality:'Diamond Quality',
+    color:'Diamond Colour',
+    clarity:'Diamond Clarity',
     setting:'Ring Setting / Style',
     holding:'Diamond Holding / Basket',
-    band:'Band Width',
+    bandStyle:'Band Style',
+    band:'Band Width / Thickness',
+    pave:'Diamond Pavé Band',
     metal:'Gold / Metal Material',
     timeline:'Turnaround Time'
   };
@@ -1005,7 +1196,7 @@ async function downloadEstimatePDF(){
 
   ensureSpace(14);
   pdf.text(
-    'This document is an estimate only and is not a final invoice or appraisal.',
+    'This document is a calculated custom ring price summary and is not an invoice or appraisal.',
     margin,
     y
   );
