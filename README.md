@@ -1,0 +1,10 @@
+images/locations/README.md
+images/shapes/README.md
+images/sizes/README.md
+images/quality/README.md
+images/settings/README.md
+images/holding/README.md
+images/band-styles/README.md
+images/bands/README.md
+images/pave/README.md
+images/metals/README.md
